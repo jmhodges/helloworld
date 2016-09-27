@@ -29,6 +29,12 @@ docker save -o image.tar $APP
 COMMIT=$(git rev-parse HEAD)
 BUILD=$(git rev-parse --short HEAD)
 
+# curl -v -s -u ":$DOCKER_UPLOAD_TOKEN" -X POST https://www.skyliner.io/images/docker/$COMMIT
+# if [[ $? != "0" ]]; then
+#    echo "failed" >> /dev/stderr
+# exit 1
+# fi
+
 # Ask Skyliner for the upload URL, authenticating with the upload token
 URL=$(curl -s -u ":$DOCKER_UPLOAD_TOKEN" -X POST https://www.skyliner.io/images/docker/$COMMIT)
 
